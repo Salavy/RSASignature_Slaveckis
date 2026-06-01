@@ -37,7 +37,7 @@ public class VerifierFrame extends JFrame {
         JPanel panel = new JPanel(new GridLayout(2, 3, 8, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Receiver Server"));
 
-        portField = new JTextField("5000");
+        portField = new JTextField("5001");
         statusLabel = new JLabel("Status: not listening");
 
         startServerButton = new JButton("Start Receiver");
@@ -175,8 +175,6 @@ public class VerifierFrame extends JFrame {
                 return;
             }
 
-            // This is the important Level 2 change:
-            // The verifier uses the public key received from the signer, not a local key pair.
             PublicKey publicKey = RSAKeyUtil.publicKeyFromBase64(publicKeyText);
             BigInteger signature = new BigInteger(signatureText);
 

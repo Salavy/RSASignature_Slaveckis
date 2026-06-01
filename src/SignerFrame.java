@@ -87,7 +87,7 @@ public class SignerFrame extends JFrame {
         signaturePanel.add(hashField, BorderLayout.SOUTH);
 
         JPanel publicKeyPanel = new JPanel(new BorderLayout());
-        publicKeyPanel.setBorder(BorderFactory.createTitledBorder("Sender Public Key (Base64, sent to verifier)"));
+        publicKeyPanel.setBorder(BorderFactory.createTitledBorder("Sender Public Key (B64)"));
         publicKeyPanel.add(new JScrollPane(publicKeyArea), BorderLayout.CENTER);
 
         panel.add(messagePanel);
@@ -103,7 +103,7 @@ public class SignerFrame extends JFrame {
         signButton = new JButton("Sign Message");
         signButton.addActionListener(e -> signMessage());
 
-        sendButton = new JButton("Send to Verifier");
+        sendButton = new JButton("Send to Proxy");
         sendButton.addActionListener(e -> sendToVerifier());
 
         clearButton = new JButton("Clear");
@@ -181,7 +181,7 @@ public class SignerFrame extends JFrame {
             SignedMessage signedMessage = new SignedMessage(message, signature, publicKey);
             SocketClient.sendSignedMessage(host, port, signedMessage);
 
-            statusLabel.setText("Status: signed message sent to verifier.");
+            statusLabel.setText("Status: signed message sent to proxy.");
             JOptionPane.showMessageDialog(this, "Signed message sent successfully.");
         } catch (NumberFormatException ex) {
             showError("Port must be a valid number.");
